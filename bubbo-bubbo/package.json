@@ -8,7 +8,7 @@
         "url": "https://github.com/AshsHub"
     },
     "scripts": {
-        "start": "npm run build-assets && vite --open",
+        "dev": "npm run build-assets && vite --open",
         "build": "npm run build-assets && tsc && vite build",
         "build-assets": "assetpack",
         "preview": "npm run build && vite preview --open",

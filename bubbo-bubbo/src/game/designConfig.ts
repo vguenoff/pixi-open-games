@@ -1,7 +1,7 @@
 /** Minimum screen width before the resizing function shrinks the view. */
-const minWidth = 428;
+const minWidth = 428
 /** Minimum screen height before the resizing function shrinks the view. */
-const minHeight = 925;
+const minHeight = 925
 
 /** Object to store all configuration values for the out of gameplay design logic. */
 export const designConfig = {
@@ -23,4 +23,4 @@ export const designConfig = {
     decorCountMobile: 3,
     /** The url used to redirect the user to the open games github page */
     forkMeURL: 'https://github.com/pixijs/open-games',
-};
+}

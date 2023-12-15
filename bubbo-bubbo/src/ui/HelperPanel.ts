@@ -1,28 +1,26 @@
-import gsap from 'gsap';
-import { Container, Sprite, Text } from 'pixi.js';
+import gsap from 'gsap'
+import { Container, Sprite, Text } from 'pixi.js'
 
-import { designConfig } from '../game/designConfig';
-import { device } from '../utils/device';
-import { i18n } from '../utils/i18n';
+import { designConfig } from '../game/designConfig'
+import { device } from '../utils/device'
+import { i18n } from '../utils/i18n'
 
 /**
  * The panel that contains instructions on how to play the game.
  */
-export class HelperPanel
-{
+export class HelperPanel {
     /* The container instance that is the root of all visuals in this class */
-    public view = new Container();
+    public view = new Container()
 
-    constructor()
-    {
+    constructor() {
         // Create the base panel
-        const panel = Sprite.from('panel-small-instructions');
+        const panel = Sprite.from('panel-small-instructions')
 
-        panel.anchor.set(0.5);
-        panel.scale.set(0.75);
+        panel.anchor.set(0.5)
+        panel.scale.set(0.75)
 
         // Get the instructions text, either for desktop or mobile device
-        const text = i18n.t(device.isMobileDevice() ? 'helperMobile' : 'helperDesktop');
+        const text = i18n.t(device.isMobileDevice() ? 'helperMobile' : 'helperDesktop')
 
         // Create a text object with the instructions text
         const helpText = new Text(text, {
@@ -31,49 +29,46 @@ export class HelperPanel
             fontFamily: 'Opensans Semibold',
             fill: 0x000000,
             align: 'center',
-        });
+        })
 
-        helpText.anchor.set(0.5);
+        helpText.anchor.set(0.5)
 
-        helpText.x = -75;
-        panel.addChild(helpText);
+        helpText.x = -75
+        panel.addChild(helpText)
 
-        this.view.addChild(panel);
+        this.view.addChild(panel)
     }
 
     /**
      * Prepares the view container for display by setting its x-coordinate to the off-screen position.
      */
-    public prepare()
-    {
+    public prepare() {
         // Set this view's position to offscreen
-        this.view.x = this._offScreenPos;
+        this.view.x = this._offScreenPos
     }
 
     /**
      * Animates the helper panel into view
      * @returns The GSAP tween of the animation.
-    */
-    public show()
-    {
+     */
+    public show() {
         return gsap.to(this.view, {
             // Since the helper panel is initially set offscreen, it just needs to return to `0`
             x: 0,
             duration: 1,
             delay: 0.5,
             ease: 'back.out(1)',
-        });
+        })
     }
 
     /**
      * Animates the helper panel back out of view
      * @returns The GSAP tween of the animation.
      */
-    public hide()
-    {
+    public hide() {
         return gsap.to(this.view, {
             x: this._offScreenPos,
-        });
+        })
     }
 
     /**
@@ -81,8 +76,7 @@ export class HelperPanel
      * Offscreen in this instance is the gameplay view, not the full window.
      * @returns The x-coordinate of the off-screen position.
      */
-    private get _offScreenPos(): number
-    {
-        return -(designConfig.content.width * 0.5) - (this.view.width * 0.5);
+    private get _offScreenPos(): number {
+        return -(designConfig.content.width * 0.5) - this.view.width * 0.5
     }
 }

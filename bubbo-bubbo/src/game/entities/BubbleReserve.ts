@@ -1,61 +1,58 @@
-import gsap from 'gsap';
-import { Container, Sprite } from 'pixi.js';
+import gsap from 'gsap'
+import { Container, Sprite } from 'pixi.js'
 
-import type { BubbleType } from '../boardConfig';
-import { boardConfig } from '../boardConfig';
-import { BubbleView } from './BubbleView';
+import type { BubbleType } from '../boardConfig'
+import { boardConfig } from '../boardConfig'
+import { BubbleView } from './BubbleView'
 
 /**
  * This class represents the BubbleReserve.
  * It holds the BubbleView instance which is the next bubble that will be shot from the cannon.
  */
-export class BubbleReserve
-{
+export class BubbleReserve {
     /** The Container instance which contains all the visual elements for this class. */
-    public view = new Container();
-    
-    /** An instance of the BubbleView class, representing the next bubble that will be shot from the cannon. */
-    private _bubbleView: BubbleView;
-    /** Define the default scale of the bubble, to keep constant values in one place */
-    private readonly _defaultBubbleScale = 2;
-    /** The type of the bubble. */
-    private _type!: BubbleType | 'empty';
-    /** The visual base of the reserve, which contains the bubble view */
-    private _base: Sprite;
+    public view = new Container()
 
-    constructor()
-    {
+    /** An instance of the BubbleView class, representing the next bubble that will be shot from the cannon. */
+    private _bubbleView: BubbleView
+    /** Define the default scale of the bubble, to keep constant values in one place */
+    private readonly _defaultBubbleScale = 2
+    /** The type of the bubble. */
+    private _type!: BubbleType | 'empty'
+    /** The visual base of the reserve, which contains the bubble view */
+    private _base: Sprite
+
+    constructor() {
         // Create a sprite instance from the "bubble-reserve-base" texture.
-        this._base = Sprite.from('bubble-reserve-base');
+        this._base = Sprite.from('bubble-reserve-base')
 
         // Set the anchor point and scale of the base.
-        this._base.anchor.set(0.5);
-        this._base.scale.set(0.9);
+        this._base.anchor.set(0.5)
+        this._base.scale.set(0.9)
 
-        this.view.addChild(this._base);
-        
-        const ring = Sprite.from('bubble-reserve-ring');
+        this.view.addChild(this._base)
+
+        const ring = Sprite.from('bubble-reserve-ring')
 
         // Set the anchor point and scale of the base to be less than the base.
         // Move two pixels to offset the shadow
-        ring.anchor.set(0.5);
-        ring.scale.set(0.85);
-        ring.y -= 2;
-        this._base.addChild(ring);
+        ring.anchor.set(0.5)
+        ring.scale.set(0.85)
+        ring.y -= 2
+        this._base.addChild(ring)
 
         // Create the bubble view to represent the next shot for the cannon
-        this._bubbleView = new BubbleView();
-        this._bubbleView.view.scale.set(0);
-        ring.addChild(this._bubbleView.view);
+        this._bubbleView = new BubbleView()
+        this._bubbleView.view.scale.set(0)
+        ring.addChild(this._bubbleView.view)
     }
 
     /**
      * Gets the type of the bubble.
      * @returns - The type of the bubble.
      */
-    public get type(): BubbleType
-    {
-        return this._type;
+    public get type(): BubbleType {
+        return this._type
     }
 
     /**
@@ -63,33 +60,31 @@ export class BubbleReserve
      * It updates the texture, tint, and visibility of the sprite and shadow based on the new type.
      * @param value - The type of the bubble (or "empty" if you want no bubble).
      */
-    public set type(value: BubbleType | 'empty')
-    {
+    public set type(value: BubbleType | 'empty') {
         // Hide the bubble
-        this._bubbleView.view.scale.set(0);
-        
+        this._bubbleView.view.scale.set(0)
+
         // Store the new type
-        this._type = value;
+        this._type = value
 
-        if (value === 'empty')
-        {
+        if (value === 'empty') {
             // Force the tint to be white
-            this._base.tint = 0xffffff;
+            this._base.tint = 0xffffff
 
-            return;
+            return
         }
-        
+
         // Set the type of the BubbleView instance.
-        this._bubbleView.type = value;
+        this._bubbleView.type = value
         // Set the tint color of the base sprite based on the type of the bubble.
-        this._base.tint = boardConfig.bubbleTypeToColor[value];
-        
+        this._base.tint = boardConfig.bubbleTypeToColor[value]
+
         // Animate the bubble view in
         gsap.to(this._bubbleView.view.scale, {
             x: this._defaultBubbleScale,
             y: this._defaultBubbleScale,
             duration: 0.4,
             ease: 'back.out',
-        });
+        })
     }
 }

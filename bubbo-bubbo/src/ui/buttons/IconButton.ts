@@ -1,24 +1,22 @@
-import { FancyButton } from '@pixi/ui';
+import { FancyButton } from '@pixi/ui'
 
-import { sfx } from '../../audio';
-import { getAnimations } from './configs/animationConfig';
+import { sfx } from '../../audio'
+import { getAnimations } from './configs/animationConfig'
 
 /** Constant to define the default scale of the button */
-const DEFAULT_SCALE = 0.75;
+const DEFAULT_SCALE = 0.75
 
 /** Unique button to be used to toggle audio from the pause menu.
  *
  * Uses elements from @pixi/ui.
  */
-export class IconButton extends FancyButton
-{
+export class IconButton extends FancyButton {
     /**
      *
      * @param icon - string ID of the icon texture
      * @param scale - Base scale of the button, defaults to `DEFAULT_SCALE` constant
      */
-    constructor(icon: string, scale = DEFAULT_SCALE)
-    {
+    constructor(icon: string, scale = DEFAULT_SCALE) {
         super({
             // Set the base's asset
             defaultView: 'button-flat-small',
@@ -34,17 +32,16 @@ export class IconButton extends FancyButton
             animations: getAnimations(scale),
             // Set initial scale to given scale
             scale,
-        });
+        })
     }
 
     /**
      * Override function for the FancyButton, called when button is pressed
      */
-    public override press()
-    {
+    public override press() {
         // Play audio
         sfx.play('audio/secondary-button-press.wav', {
             speed: 1.1,
-        });
+        })
     }
 }

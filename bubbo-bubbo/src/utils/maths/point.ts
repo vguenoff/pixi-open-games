@@ -1,13 +1,12 @@
-import { IPointData } from 'pixi.js';
+import { IPointData } from 'pixi.js'
 
 /**
  * Find the magnitude of a point.
  * @param point - The point to measure.
  * @returns The magnitude of the point.
  */
-export function magnitude(point: IPointData): number
-{
-    return Math.sqrt(point.x * point.x + point.y * point.y);
+export function magnitude(point: IPointData): number {
+    return Math.sqrt(point.x * point.x + point.y * point.y)
 }
 
 /**
@@ -16,9 +15,8 @@ export function magnitude(point: IPointData): number
  * @param point2 - Second point.
  * @returns The distance between the two points.
  */
-export function distance(point1: IPointData, point2: IPointData): number
-{
-    return magnitude({ x: point1.x - point2.x, y: point1.y - point2.y });
+export function distance(point1: IPointData, point2: IPointData): number {
+    return magnitude({ x: point1.x - point2.x, y: point1.y - point2.y })
 }
 
 /**
@@ -27,20 +25,18 @@ export function distance(point1: IPointData, point2: IPointData): number
  * @param scale - The scale factor.
  * @returns The scaled point.
  */
-export function scale(point: IPointData, scale: number): IPointData
-{
-    return { x: point.x * scale, y: point.y * scale };
+export function scale(point: IPointData, scale: number): IPointData {
+    return { x: point.x * scale, y: point.y * scale }
 }
 /**
  * Normalize a point.
  * @param point - The point to normalize.
  * @returns The normalized point.
  */
-export function normalize(point: IPointData): IPointData
-{
-    const mag = magnitude(point);
+export function normalize(point: IPointData): IPointData {
+    const mag = magnitude(point)
 
-    return scale(point, 1 / mag);
+    return scale(point, 1 / mag)
 }
 
 /**
@@ -49,9 +45,8 @@ export function normalize(point: IPointData): IPointData
  * @param point2 - Second point.
  * @returns The sum of the two points.
  */
-export function add(point1: IPointData, point2: IPointData): IPointData
-{
-    return { x: point1.x + point2.x, y: point1.y + point2.y };
+export function add(point1: IPointData, point2: IPointData): IPointData {
+    return { x: point1.x + point2.x, y: point1.y + point2.y }
 }
 
 /**
@@ -60,9 +55,8 @@ export function add(point1: IPointData, point2: IPointData): IPointData
  * @param point2 - Second point.
  * @returns The difference between the two points.
  */
-export function sub(point1: IPointData, point2: IPointData): IPointData
-{
-    return { x: point1.x - point2.x, y: point1.y - point2.y };
+export function sub(point1: IPointData, point2: IPointData): IPointData {
+    return { x: point1.x - point2.x, y: point1.y - point2.y }
 }
 
 /**
@@ -71,9 +65,8 @@ export function sub(point1: IPointData, point2: IPointData): IPointData
  * @param point2 - Second point.
  * @returns The dot product of the two points.
  */
-export function dot(point1: IPointData, point2: IPointData): number
-{
-    return point1.x * point2.x + point1.y * point2.y;
+export function dot(point1: IPointData, point2: IPointData): number {
+    return point1.x * point2.x + point1.y * point2.y
 }
 
 /**
@@ -81,9 +74,8 @@ export function dot(point1: IPointData, point2: IPointData): number
  * @param point - The point to convert to an angle
  * @returns The angle in radians of the point.
  */
-export function pointToAngle(point: IPointData): number
-{
-    return Math.atan2(point.y, point.x);
+export function pointToAngle(point: IPointData): number {
+    return Math.atan2(point.y, point.x)
 }
 
 /**
@@ -91,9 +83,8 @@ export function pointToAngle(point: IPointData): number
  * @param angle - The angle in radians to convert to a point.
  * @returns The 2D point representation of the angle.
  */
-export function angleToPoint(angle: number): IPointData
-{
-    return { x: Math.cos(angle), y: Math.sin(angle) };
+export function angleToPoint(angle: number): IPointData {
+    return { x: Math.cos(angle), y: Math.sin(angle) }
 }
 
 /**
@@ -102,7 +93,6 @@ export function angleToPoint(angle: number): IPointData
  * @param y - The y-coordinate of the point. Default is `0`.
  * @returns The 2D point with the specified x and y coordinates.
  */
-export function point(x = 0, y = 0): IPointData
-{
-    return { x, y };
+export function point(x = 0, y = 0): IPointData {
+    return { x, y }
 }

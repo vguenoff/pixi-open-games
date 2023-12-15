@@ -22,4 +22,4 @@ export const i18nDict = {
     resultsBreakdownCombo: 'Best combo',
     resultsScoreTitle: 'FINAL SCORE',
     resultsHighscoreTitle: 'HIGHSCORE',
-};
+}

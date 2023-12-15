@@ -29,4 +29,4 @@ export const getAnimations = (scale: number) => ({
         },
         duration: 100,
     },
-});
+})

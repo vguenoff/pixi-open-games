@@ -1,40 +1,37 @@
-import type { ButtonOptions } from '@pixi/ui';
-import { FancyButton } from '@pixi/ui';
-import type { TextStyle } from 'pixi.js';
-import { Sprite, Text } from 'pixi.js';
+import type { ButtonOptions } from '@pixi/ui'
+import { FancyButton } from '@pixi/ui'
+import type { TextStyle } from 'pixi.js'
+import { Sprite, Text } from 'pixi.js'
 
-import { sfx } from '../../audio';
-import { getAnimations } from './configs/animationConfig';
+import { sfx } from '../../audio'
+import { getAnimations } from './configs/animationConfig'
 
 /**
  * Options for the secondary button.
  */
-export interface SecondaryButtonOptions
-{
+export interface SecondaryButtonOptions {
     /** The text displayed on the button. */
-    text: string;
+    text: string
     /** The tint color applied to the button. */
-    tint?: number;
+    tint?: number
     /** Style properties for the text displayed on the button. */
-    textStyle?: Partial<TextStyle>;
+    textStyle?: Partial<TextStyle>
     /** Options for the underlying button component. */
-    buttonOptions?: ButtonOptions;
+    buttonOptions?: ButtonOptions
 }
 
 /** Constant to define the default scale of the button */
-const DEFAULT_SCALE = 0.75;
+const DEFAULT_SCALE = 0.75
 
 /** Common button that can be used throughout the game.
  *
  * Uses elements from @pixi/ui.
  */
-export class SecondaryButton extends FancyButton
-{
+export class SecondaryButton extends FancyButton {
     /**
      * @param options - Options for the secondary button.
      */
-    constructor(options?: SecondaryButtonOptions)
-    {
+    constructor(options?: SecondaryButtonOptions) {
         // Create text object to act as label
         const text = new Text(options?.text ?? '', {
             // Predefine text styles that can be overwritten
@@ -45,7 +42,7 @@ export class SecondaryButton extends FancyButton
             fontSize: 40,
             // Allow custom text style to overwrite predefined options
             ...options?.textStyle,
-        });
+        })
 
         super({
             // Assign the default view
@@ -60,23 +57,21 @@ export class SecondaryButton extends FancyButton
             scale: DEFAULT_SCALE,
             // Allow custom button options to overwrite predefined options
             ...options?.buttonOptions,
-        });
+        })
 
-        if (options?.tint)
-        {
+        if (options?.tint) {
             // Tint base asset if tint defined in options
-            (this.defaultView as Sprite).tint = options.tint;
+            ;(this.defaultView as Sprite).tint = options.tint
         }
     }
 
     /**
      * Override function for the FancyButton, called when button is pressed
      */
-    public override press()
-    {
+    public override press() {
         // Since this is a common button, all button responses are done outside of this class
 
         // Play audio
-        sfx.play('audio/secondary-button-press.wav');
+        sfx.play('audio/secondary-button-press.wav')
     }
 }

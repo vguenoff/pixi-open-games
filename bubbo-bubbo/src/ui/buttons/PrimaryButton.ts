@@ -1,44 +1,41 @@
-import type { ButtonOptions } from '@pixi/ui';
-import { FancyButton } from '@pixi/ui';
-import type { TextStyle } from 'pixi.js';
-import { Text } from 'pixi.js';
+import type { ButtonOptions } from '@pixi/ui'
+import { FancyButton } from '@pixi/ui'
+import type { TextStyle } from 'pixi.js'
+import { Text } from 'pixi.js'
 
-import { sfx } from '../../audio';
+import { sfx } from '../../audio'
 
 /**
  * Options for the primary button.
  */
-export interface PrimaryButtonOptions
-{
+export interface PrimaryButtonOptions {
     /** The text displayed on the button. */
-    text: string;
+    text: string
     /** Style properties for the text displayed on the button. */
-    textStyle?: Partial<TextStyle>;
+    textStyle?: Partial<TextStyle>
     /** Options for the underlying button component. */
-    buttonOptions?: ButtonOptions;
+    buttonOptions?: ButtonOptions
 }
 
 /** Constant to define the default scale of the button */
-const DEFAULT_SCALE = 0.6;
+const DEFAULT_SCALE = 0.6
 
-export class PrimaryButton extends FancyButton
-{
+export class PrimaryButton extends FancyButton {
     /**
      * @param options - Options for the primary button.
      */
-    constructor(options: PrimaryButtonOptions)
-    {
+    constructor(options: PrimaryButtonOptions) {
         // Create text object to act as label
         const text = new Text(options?.text ?? '', {
             // Predefine text styles that can be overwritten
-            fill: 0x49C8FF,
+            fill: 0x49c8ff,
             fontFamily: 'Bungee Regular',
             fontWeight: 'bold',
             align: 'center',
             fontSize: 40,
             // Allow custom text style to overwrite predefined options
             ...options?.textStyle,
-        });
+        })
 
         super({
             // Assign the default view
@@ -63,17 +60,16 @@ export class PrimaryButton extends FancyButton
             scale: DEFAULT_SCALE,
             // Allow custom button options to overwrite predefined options
             ...options.buttonOptions,
-        });
+        })
     }
-    
+
     /**
      * Override function for the FancyButton, called when button is pressed
      */
-    public override press()
-    {
+    public override press() {
         // Since this is a common button, all button responses are done outside of this class
 
         // Play audio
-        sfx.play('audio/primary-button-press.wav');
+        sfx.play('audio/primary-button-press.wav')
     }
 }
